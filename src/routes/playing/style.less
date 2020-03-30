@@ -1,15 +1,19 @@
-@import '~@/styles/var';
+@import "~@/styles/var";
 
 .container {
-  width: 100%;
+  position: relative;
   height: 100vh;
-  padding: 30px 25px 25px 25px;
+  margin: 0 7.3%;
   .content {
-    display: flex;
-    box-sizing: border-box;
-    height: calc(~'100% - 80px');
+    width: 100%;
+    position: absolute;
+    top: 11%;
+    bottom: 18%;
+    min-height: 328px;
+    cursor: default;
     .left {
-      flex: 1;
+      
+      margin-right: 440px;
       height: 100%;
       overflow: hidden;
       .btnGroup {
@@ -21,40 +25,46 @@
         }
       }
       .main {
+        position: relative;
         width: 100%;
-        height: calc(~'100% - 60px');
+        height: 100%;
       }
     }
     .right {
-      position: relative;
-      width: 310px;
-      margin-left: 30px;
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 340px;
+      height: 100%;
+      text-align: center;
+      font-size: 14px;
+      line-height: 24px;
     }
   }
+}
 
-  /*遮罩*/
-  .playerBg,
-  .playerMask {
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-  }
+/*遮罩*/
+.playerBg,
+.playerMask {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
 
-  .playerMask {
-    z-index: -1;
-    background-color: @mask_color;
-  }
+.playerMask {
+  z-index: -1;
+  background-color: @mask_color;
+}
 
-  .playerBg {
-    z-index: -2;
-    background-image: url(~@/assets/music-bg.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: 50%;
-    filter: blur(12px); // 设置背景图 高斯模糊
-    opacity: 0.7;
-    transition: all 0.8s;
-  }
+.playerBg {
+  z-index: -2;
+  background-image: url(~@/assets/music-bg.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50%;
+  filter: blur(12px); // 设置背景图 高斯模糊
+  opacity: 0.7;
+  transition: all 0.8s;
 }
