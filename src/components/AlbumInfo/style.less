@@ -1,0 +1,28 @@
+.albumWrap {
+  padding-bottom: 20px;
+  text-align: center;
+  dt {
+    position: relative;
+    width: 186px;
+    height: 186px;
+    margin: 0 auto 15px;
+    &::after {
+      content: '';
+      position: absolute;
+      left: 9px;
+      top: 0;
+      width: 201px;
+      height: 180px;
+      background: url('~@/assets/album_cover_player.png') 0 0 no-repeat;
+    }
+    img {
+      vertical-align: middle;
+      width: 186px;
+      height: 186px;
+    }
+  }
+  dd {
+    height: 30px;
+    line-height: 30px;
+  }
+}
