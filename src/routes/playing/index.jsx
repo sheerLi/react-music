@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import classnames from 'classnames';
 
 import { Loading, Button, AlbumInfo, MusicList } from "@/components";
 import { getTopListRequest } from "@/redux/actions";
@@ -40,6 +41,21 @@ class Playing extends React.Component {
             <div className={styles.right}>
               <AlbumInfo />
             </div>
+          </div>
+          <div className={styles.controls}>
+            <div className={classnames(styles.iconBtn, styles.iconPre)} />
+            <div className={classnames(styles.iconBtn, styles.iconPlay)} />
+            <div className={classnames(styles.iconBtn, styles.iconNext)} />
+            <div className={styles.progressWrap}>
+              <div className={styles.musicInfo__name}>fhkahkhk</div>
+              <div className={styles.musicInfo__time}>1:00/3:00</div>
+              <div className={styles.playerProgress}>
+                <div className={styles.playerProgressInner}>
+                  <div className={styles.preload}></div>
+                </div>
+              </div>
+            </div>
+            <div className={classnames(styles.iconBtn, styles.iconMode)} />
           </div>
         </div>
         {/* 遮罩层 */}

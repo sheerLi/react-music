@@ -1,4 +1,5 @@
 @import "~@/styles/var";
+@import "~@/styles/mixin";
 
 .container {
   position: relative;
@@ -12,7 +13,6 @@
     min-height: 328px;
     cursor: default;
     .left {
-      
       margin-right: 440px;
       height: 100%;
       overflow: hidden;
@@ -39,6 +39,79 @@
       text-align: center;
       font-size: 14px;
       line-height: 24px;
+    }
+  }
+  .controls {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 11%;
+
+    // 使用精灵图
+    .iconBtn {
+      position: absolute;
+      opacity: 0.8;
+      background-image: url("~@/assets/player.png");
+      cursor: pointer;
+      &.iconPre {
+        top: 4px;
+        left: 0;
+        width: 19px;
+        height: 20px;
+        background-position: 0px -30px;
+      }
+      &.iconPlay {
+        top: 0;
+        left: 65px;
+        width: 21px;
+        height: 29px;
+        background-position: 0 0;
+      }
+      &.iconNext {
+        top: 4px;
+        left: 132px;
+        width: 19px;
+        height: 20px;
+        background-position: 0 -52px;
+      }
+      &.iconMode {
+        top: 4px;
+        right: 378px;
+        width: 26px;
+        height: 25px;
+        background-position: 0 -205px;
+      }
+    }
+    .progressWrap {
+      position: relative;
+      margin: 0 448px 0 208px;
+      .musicInfo__name {
+        padding-right: 90px;
+        .no-wrap();
+      }
+      .musicInfo__time {
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
+      .playerProgress {
+        padding-top: 6px;
+        height: 8px;
+        cursor: pointer;
+        color: rgba(225,225,225,.8);
+        .playerProgressInner {
+          position: relative;
+          height: 2px;
+          color: rgba(225,225,225,.1);
+
+          .preload {
+            width: 16%;
+            height: 2px;
+            background: rgba(225,225,225,.2);
+          }
+        }
+      }
     }
   }
 }

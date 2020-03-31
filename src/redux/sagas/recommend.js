@@ -1,8 +1,7 @@
 import { call, put, take, fork } from 'redux-saga/effects';
 import { getTopList } from '@/services/recommend';
-import { fetchRequest, fetchFailed, getTopListSuccess } from '@/redux/actions';
+import { fetchRequest, fetchSuccess, fetchFailed, getTopListSuccess } from '@/redux/actions';
 import { GET_TOP_LIST_REQUEST } from '@/constants/actionTypes';
-import { fetchSuccess } from '../redux/actions';
 
 function* fetchTopListWorker(payload) {
   try {
