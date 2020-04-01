@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import classnames from 'classnames';
+import classnames from "classnames";
 
 import { Loading, Button, AlbumInfo, MusicList, Lyric } from "@/components";
 import { getTopListRequest } from "@/redux/actions";
@@ -18,8 +18,8 @@ class Playing extends React.Component {
   }
 
   handleSelect = song => {
-    console.log(song)
-  }
+    console.log(song);
+  };
 
   render() {
     const { isFetching, topList } = this.props;
@@ -55,12 +55,13 @@ class Playing extends React.Component {
               <div className={styles.musicInfo__name}>fhkahkhk</div>
               <div className={styles.musicInfo__time}>1:00/3:00</div>
               <div className={styles.playerProgress}>
-                <div className={styles.playerProgressInner}>
-                  <div className={styles.preload}></div>
+                <div className={styles.playerProgressInner}></div>
+                <div className={styles.currentLoad}>
+                  <i className={classnames(styles.iconBtn, styles.iconDot)}></i>
                 </div>
               </div>
             </div>
-            <div className={classnames(styles.iconBtn, styles.iconMode)} />
+            <div className={classnames(styles.iconBtn, styles.iconRandom)} />
           </div>
         </div>
         {/* 遮罩层 */}

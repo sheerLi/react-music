@@ -11,7 +11,7 @@
 
   .listContent {
     width: 100%;
-    height: calc(~'100% - 60px');
+    height: calc(~"100% - 60px");
     overflow-x: hidden;
     overflow-y: scroll;
     // -webkit-overflow-scrolling: touch;
@@ -83,6 +83,27 @@
       line-height: 50px;
       height: 50px;
       .no-wrap();
+    }
+
+    &:hover {
+      .listItem__name {
+        .listItem_menu {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          right: 0;
+          .icon {
+            display: block;
+            width: 36px;
+            height: 36px;
+            background-repeat: no-repeat;
+            background-image: url("~@/assets/icon_list_menu.png");
+            &.iconPlay {
+              background-position: -80px 0;
+            }
+          }
+        }
+      }
     }
   }
 }

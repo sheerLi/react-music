@@ -1,4 +1,4 @@
-const env = 'http://localhost:3001'
+const env = 'http://localhost:3000'
 
 
 const TOP_LIST = `${env}/top/list`; // 获取排行榜歌单
