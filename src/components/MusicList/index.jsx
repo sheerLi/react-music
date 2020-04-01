@@ -2,7 +2,7 @@ import React from "react";
 import classnames from "classnames";
 import styles from "./style.less";
 
-export default ({ list }) => (
+export default ({ list, onClick }) => (
   <div className={styles.listWrap}>
     <div className={classnames(styles.listHeader, styles.listItem)}>
       <div className={styles.listItem__name}>歌曲</div>
@@ -11,7 +11,7 @@ export default ({ list }) => (
     </div>
     <div className={styles.listContent}>
       {list.map((item, index) => (
-        <div className={styles.listItem} key={item.id}>
+        <div className={styles.listItem} key={item.id} onClick={() => onClick(item)}>
           <div className={styles.listItem__num}>{index + 1}</div>
           <div className={styles.listItem__name}>{item.name}</div>
           <div className={styles.listItem__singer}>{item.singer}</div>

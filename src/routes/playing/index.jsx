@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import classnames from 'classnames';
 
-import { Loading, Button, AlbumInfo, MusicList } from "@/components";
+import { Loading, Button, AlbumInfo, MusicList, Lyric } from "@/components";
 import { getTopListRequest } from "@/redux/actions";
 
 import styles from "./style.less";
@@ -15,6 +15,10 @@ class Playing extends React.Component {
   componentDidMount() {
     const { getTopList } = this.props;
     getTopList({ idx: 1 });
+  }
+
+  handleSelect = song => {
+    console.log(song)
   }
 
   render() {
@@ -34,12 +38,13 @@ class Playing extends React.Component {
                 ))}
               </div>
               <div className={styles.main}>
-                <MusicList list={topList} />
+                <MusicList list={topList} onClick={this.handleSelect} />
                 {isFetching && <Loading />}
               </div>
             </div>
             <div className={styles.right}>
               <AlbumInfo />
+              <Lyric />
             </div>
           </div>
           <div className={styles.controls}>
