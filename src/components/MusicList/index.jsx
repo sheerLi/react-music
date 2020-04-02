@@ -11,7 +11,11 @@ export default ({ list, onClick }) => (
     </div>
     <div className={styles.listContent}>
       {list.map((item, index) => (
-        <div className={styles.listItem} key={item.id} onClick={() => onClick(item)}>
+        <div
+          className={styles.listItem}
+          key={item.id}
+          onClick={() => onClick(item)}
+        >
           <div className={styles.listItem__num}>{index + 1}</div>
           <div className={styles.listItem__name}>
             {item.name}
@@ -20,7 +24,12 @@ export default ({ list, onClick }) => (
             </div>
           </div>
           <div className={styles.listItem__singer}>{item.singer}</div>
-          <div className={styles.listItem__time}>{item.duration}</div>
+          <div className={styles.listItem__time}>
+            <div className={styles.listItem_menu}>
+              <i className={classnames(styles.icon, styles.iconDelete)}></i>
+            </div>
+            {item.duration}
+          </div>
         </div>
       ))}
     </div>
