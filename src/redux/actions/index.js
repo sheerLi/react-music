@@ -4,6 +4,10 @@ import {
   FETCH_FAILED,
   GET_TOP_LIST_REQUEST,
   GET_TOP_LIST_SUCCESS,
+  SET_PLAYING_LIST,
+  SET_CURRENT_SONG,
+  SET_AUDIO_ELEMENT,
+  SET_PLAYING,
 } from '@/constants/actionTypes';
 
 export const fetchRequest = function() {
@@ -30,4 +34,32 @@ export function getTopListSuccess(list) {
     type: GET_TOP_LIST_SUCCESS,
     payload: list
   };
+}
+
+export function setPlayingList(list) {
+  return {
+    type: SET_PLAYING_LIST,
+    payload: list
+  }
+}
+
+export function setCurrentSong(song) {
+  return {
+    type: SET_CURRENT_SONG,
+    payload: song,
+  }
+}
+
+export function setPlaying(playing) {
+  return {
+    type: SET_PLAYING,
+    payload: playing,
+  }
+}
+
+export function setAudioElement(ele) {
+  return {
+    type: SET_AUDIO_ELEMENT,
+    payload: ele
+  }
 }

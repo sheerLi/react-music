@@ -1,13 +1,13 @@
 import { call, put, take, fork } from 'redux-saga/effects';
 import { getTopList } from '@/services/recommend';
-import { fetchRequest, fetchSuccess, fetchFailed, getTopListSuccess } from '@/redux/actions';
+import { fetchRequest, fetchSuccess, fetchFailed, setPlayingList } from '@/redux/actions';
 import { GET_TOP_LIST_REQUEST } from '@/constants/actionTypes';
 
 function* fetchTopListWorker(payload) {
   try {
     yield put(fetchRequest())
     const res = yield call(getTopList, payload);
-    yield put(getTopListSuccess(res));
+    yield put(setPlayingList(res));
     yield put(fetchSuccess())
   } catch (error) {
     yield put(fetchFailed())

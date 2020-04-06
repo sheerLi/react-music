@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import classnames from "classnames";
 
 import { Loading, Button, AlbumInfo, MusicList, Lyric } from "@/components";
-import { getTopListRequest } from "@/redux/actions";
-
+import { getTopListRequest, setCurrentSong, setPlaying } from "@/redux/actions";
+import { silencePromise } from '@/utils/util.js';
 import styles from "./style.less";
 
 const Buttons = [{ key: "playing", text: "正在播放", path: "/playing" }];
@@ -17,12 +17,27 @@ class Playing extends React.Component {
     getTopList({ idx: 1 });
   }
 
-  handleSelect = song => {
-    console.log(song);
+  handlePlay = song => {
+    const { setCurrentSong, setPlaying, audioEle, currentSong, playing } = this.props;
+    if(song.id === currentSong.id) {
+      console.log(playing)
+      setPlaying(!playing);   
+      if(playing) {
+        audioEle.current.pause();
+        return;
+      }
+      silencePromise(audioEle.current.play());
+      return;
+    }
+    setCurrentSong(song);
+    setPlaying(true);   
+    audioEle.current.src = song.url;
+    silencePromise(audioEle.current.play());
   };
 
   render() {
-    const { isFetching, topList } = this.props;
+    const { isFetching, playList, currentSong, playing } = this.props;
+    const { name, duration, image } = currentSong;
     return (
       <>
         <div className={styles.container}>
@@ -38,22 +53,22 @@ class Playing extends React.Component {
                 ))}
               </div>
               <div className={styles.main}>
-                <MusicList list={topList} onClick={this.handleSelect} />
+                <MusicList list={playList} onPlay={this.handlePlay} currentSong={currentSong} playing={playing} />
                 {isFetching && <Loading />}
               </div>
             </div>
             <div className={styles.right}>
-              <AlbumInfo />
+              <AlbumInfo currentMusic={currentSong} />
               <Lyric />
             </div>
           </div>
-          <div className={styles.controls}>
+          <div className={styles.controls} disabled={!currentSong.id}>
             <div className={classnames(styles.iconBtn, styles.iconPre)} />
-            <div className={classnames(styles.iconBtn, styles.iconPlay)} />
+            <div className={classnames(styles.iconBtn, styles.iconPlay, { [styles.on]: playing })} />
             <div className={classnames(styles.iconBtn, styles.iconNext)} />
             <div className={styles.progressWrap}>
-              <div className={styles.musicInfo__name}>fhkahkhk</div>
-              <div className={styles.musicInfo__time}>1:00/3:00</div>
+                <div className={styles.musicInfo__name}>{name}</div>
+                <div className={styles.musicInfo__time}>{duration}</div>
               <div className={styles.playerProgress}>
                 <div className={styles.playerProgressInner}></div>
                 <div className={styles.currentLoad}>
@@ -65,7 +80,7 @@ class Playing extends React.Component {
           </div>
         </div>
         {/* 遮罩层 */}
-        <div className={styles.playerBg}></div>
+        <div className={styles.playerBg} style={{ backgroundImage: `url(${image}?param=300y300)`, transition: 'all 0.8s' }}></div>
         <div className={styles.playerMask}></div>
       </>
     );
@@ -74,13 +89,22 @@ class Playing extends React.Component {
 
 const mapState = state => ({
   isFetching: state.app.isFetching,
-  topList: state.recommend.topList
+  playList: state.music.playList,
+  currentSong: state.music.currentSong,
+  playing: state.music.playing,
+  audioEle: state.music.audioEle,
 });
 
 const mapDispatch = dispatch => {
   return {
     getTopList: payload => {
       dispatch(getTopListRequest(payload));
+    },
+    setCurrentSong: song => {
+      dispatch(setCurrentSong(song));
+    },
+    setPlaying: playing => {
+      dispatch(setPlaying(playing));
     }
   };
 };

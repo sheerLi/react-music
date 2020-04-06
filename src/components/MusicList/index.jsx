@@ -2,7 +2,7 @@ import React from "react";
 import classnames from "classnames";
 import styles from "./style.less";
 
-export default ({ list, onClick }) => (
+export default ({ list, onPlay, currentSong, playing }) => (
   <div className={styles.listWrap}>
     <div className={classnames(styles.listHeader, styles.listItem)}>
       <div className={styles.listItem__name}>歌曲</div>
@@ -11,16 +11,15 @@ export default ({ list, onClick }) => (
     </div>
     <div className={styles.listContent}>
       {list.map((item, index) => (
-        <div
-          className={styles.listItem}
-          key={item.id}
-          onClick={() => onClick(item)}
-        >
+        <div className={classnames(styles.listItem, { [styles.on]: item.id === currentSong.id && playing })} key={item.id}>
           <div className={styles.listItem__num}>{index + 1}</div>
           <div className={styles.listItem__name}>
             {item.name}
             <div className={styles.listItem_menu}>
-              <i className={classnames(styles.icon, styles.iconPlay)}></i>
+              <i
+                className={classnames(styles.icon, styles.iconPlay)}
+                onClick={() => onPlay(item)}
+              ></i>
             </div>
           </div>
           <div className={styles.listItem__singer}>{item.singer}</div>

@@ -30,8 +30,8 @@ class Lyric extends Component {
 
   render() {
     return (
-      <div ref="musicLyric" class={styles.musicLyric}>
-        <div class={styles.musicLyricItems}>{this.renderLyricItems()}</div>
+      <div ref="musicLyric" className={styles.musicLyric}>
+        <div className={styles.musicLyricItems}>{this.renderLyricItems()}</div>
       </div>
     );
   }
