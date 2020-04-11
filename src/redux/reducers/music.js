@@ -1,9 +1,9 @@
-import { SET_PLAYING_LIST, SET_CURRENT_SONG, SET_AUDIO_ELEMENT, SET_PLAYING } from "@/constants/actionTypes";
+import { SET_PLAYING_LIST, SET_CURRENT_INDEX, SET_AUDIO_ELEMENT, SET_PLAYING } from "@/constants/actionTypes";
 
 const initMusicState = {
   audioEle: null, // 播放器元素
   playList: [], // 播放列表
-  currentSong: {}, // 当前播放歌曲信息
+  currentIndex: -1, // 当前播放歌曲索引
   playing: false // 播放状态
 };
 
@@ -14,10 +14,10 @@ export function musicReducer(state = initMusicState, action) {
         ...state,
         playList: action.payload
       };
-    case SET_CURRENT_SONG:
+    case SET_CURRENT_INDEX:
       return {
         ...state,
-        currentSong: action.payload
+        currentIndex: action.payload
       };
     case SET_AUDIO_ELEMENT:
       return {

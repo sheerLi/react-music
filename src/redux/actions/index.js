@@ -5,7 +5,7 @@ import {
   GET_TOP_LIST_REQUEST,
   GET_TOP_LIST_SUCCESS,
   SET_PLAYING_LIST,
-  SET_CURRENT_SONG,
+  SET_CURRENT_INDEX,
   SET_AUDIO_ELEMENT,
   SET_PLAYING,
 } from '@/constants/actionTypes';
@@ -43,10 +43,10 @@ export function setPlayingList(list) {
   }
 }
 
-export function setCurrentSong(song) {
+export function setCurrentIndex(index) {
   return {
-    type: SET_CURRENT_SONG,
-    payload: song,
+    type: SET_CURRENT_INDEX,
+    payload: index,
   }
 }
 

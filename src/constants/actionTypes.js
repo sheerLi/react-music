@@ -8,6 +8,6 @@ export const GET_TOP_LIST_FAILED = 'GET_TOP_LIST_FAILED';
 
 // 核心模块，播放器全局状态
 export const SET_PLAYING_LIST = 'SET_PLAYING_LIST';
-export const SET_CURRENT_SONG = 'SET_CURRENT_SONG';
+export const SET_CURRENT_INDEX = 'SET_CURRENT_INDEX';
 export const SET_AUDIO_ELEMENT = 'SET_AUDIO_ELEMENT';
 export const SET_PLAYING = 'SET_PLAYING';

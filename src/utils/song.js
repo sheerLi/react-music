@@ -1,4 +1,3 @@
-import { format } from './util';
 
 function filterSinger(singers) {
   let arr = [];
@@ -27,7 +26,7 @@ export function createTopList(music) {
     singer: music.ar.length > 0 && filterSinger(music.ar),
     album: music.al.name,
     image: music.al.picUrl,
-    duration: format(music.dt / 1000),
+    duration: music.dt / 1000,
     url: `https://music.163.com/song/media/outer/url?id=${music.id}.mp3`,
   });
 }

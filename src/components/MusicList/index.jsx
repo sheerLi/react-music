@@ -1,5 +1,7 @@
 import React from "react";
 import classnames from "classnames";
+import { format } from '@/utils/util';
+
 import styles from "./style.less";
 
 export default ({ list, onPlay, currentSong, playing }) => (
@@ -18,7 +20,7 @@ export default ({ list, onPlay, currentSong, playing }) => (
             <div className={styles.listItem_menu}>
               <i
                 className={classnames(styles.icon, styles.iconPlay)}
-                onClick={() => onPlay(item)}
+                onClick={() => onPlay(item, index)}
               ></i>
             </div>
           </div>
@@ -27,7 +29,7 @@ export default ({ list, onPlay, currentSong, playing }) => (
             <div className={styles.listItem_menu}>
               <i className={classnames(styles.icon, styles.iconDelete)}></i>
             </div>
-            {item.duration}
+            {format(item.duration)}
           </div>
         </div>
       ))}
