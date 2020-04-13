@@ -1,6 +1,7 @@
 import { Axios } from "@/helpers";
 import { createTopList } from "@/utils/song";
-import { TOP_LIST, RECOMMEND_LIST } from "@/constants/api";
+import { parseLyric } from "@/utils/util";
+import { TOP_LIST, RECOMMEND_LIST, LYRIC } from "@/constants/api";
 
 export function getTopList(payload) {
   return Axios.get(TOP_LIST, payload).then(res =>
@@ -10,6 +11,15 @@ export function getTopList(payload) {
         : res.data.playlist.tracks.slice(0, 100)
     )
   );
+}
+
+export async function getLyric(payload) {
+  return Axios.get(LYRIC, payload).then(res => {
+    if(res.nolyric) {
+      return null;
+    }
+    return parseLyric(res.lrc.lyric);
+  });
 }
 
 export function getPersonlized() {

@@ -17,6 +17,7 @@ import {
 } from "@/redux/actions";
 import { silencePromise, format } from "@/utils/util.js";
 import styles from "./style.less";
+import { getLyricRequest } from "../../redux/actions";
 
 const Buttons = [{ key: "playing", text: "正在播放", path: "/playing" }];
 
@@ -24,7 +25,9 @@ class Playing extends React.Component {
   constructor(props) {
     super(props);
     this.audioRef = React.createRef();
-    this.state = {};
+    this.state = {
+      lyricIndex: 0,
+    };
   }
 
   componentDidMount() {
@@ -51,7 +54,7 @@ class Playing extends React.Component {
   };
 
   handlePlay = (song, index) => {
-    const { setCurrentIndex, setPlaying, currentIndex, playing } = this.props;
+    const { setPlaying, currentIndex, playing } = this.props;
     if (index === currentIndex) {
       setPlaying(!playing);
       if (playing) {
@@ -62,41 +65,34 @@ class Playing extends React.Component {
       silencePromise(this.audioRef.current.play());
       return;
     }
-    setCurrentIndex(index);
     setPlaying(true);
-    this.audioRef.current.src = song.url;
-    silencePromise(this.audioRef.current.play());
+    this.watchCurrentMusicChange(index);
   };
 
   next = () => {
-    const { setCurrentIndex, currentIndex, playList } = this.props;
+    const { currentIndex, playList } = this.props;
     let index = currentIndex;
     if (currentIndex === playList.length - 1) {
       index = 0;
     } else {
       index = currentIndex + 1;
     }
-    setCurrentIndex(index);
-    this.audioRef.current.src = playList[index].url;
-    silencePromise(this.audioRef.current.play());
+    this.watchCurrentMusicChange(index)
   };
 
   prev = () => {
-    const { setCurrentIndex, currentIndex, playList } = this.props;
+    const { currentIndex, playList } = this.props;
     let index = currentIndex;
     if (currentIndex === 0) {
       index = playList.length - 1;
     } else {
       index = currentIndex - 1;
     }
-    setCurrentIndex(index);
-    this.audioRef.current.src = playList[index].url;
-    silencePromise(this.audioRef.current.play());
+    this.watchCurrentMusicChange(index);
   };
 
   // 修改音乐进度
   handleProgressChange = percent => {
-    console.log('progress 拖动: '+percent)
     const { currentIndex, playList } = this.props;
     if (playList[currentIndex]) {
       this.audioRef.current.currentTime =
@@ -109,15 +105,41 @@ class Playing extends React.Component {
     const { playList, currentIndex } = this.props;
     const duration = playList[currentIndex].duration;
     const currentTime = this.audioRef.current.currentTime;
+    this.changeLyricIndex(currentTime);
     this.setState({
       percent: currentTime && duration ? currentTime / duration : 0
     })   
   }
 
+  changeLyricIndex = (currentTime) => {
+    const { lyric } = this.props;
+    if(!Array.isArray(lyric)) {
+      return;
+    }
+    lyric.forEach((item, i) => {
+      if(currentTime > item.time) {
+        this.setState({
+          lyricIndex: i,
+        })
+      }
+    })
+  }
+
+  // 监听歌曲变化
+  watchCurrentMusicChange = index => {
+    const { setCurrentIndex, playList, getLyric } = this.props;
+    this.setState({
+      lyricIndex: 0
+    })
+    setCurrentIndex(index);
+    this.audioRef.current.src = playList[index].url;
+    silencePromise(this.audioRef.current.play());
+    getLyric({ id: playList[index].id });
+  }
+
   render() {
-    const { percent } = this.state;
-    console.log(percent)
-    const { isFetching, playList, currentIndex, playing } = this.props;
+    const { percent, lyricIndex } = this.state;
+    const { isFetching, playList, currentIndex, playing, lyric } = this.props;
     let currentSong = playList[currentIndex] || {};
     const { name, duration, image } = currentSong;
     return (
@@ -146,7 +168,7 @@ class Playing extends React.Component {
             </div>
             <div className={styles.right}>
               <AlbumInfo currentMusic={currentSong} />
-              <Lyric />
+              <Lyric lyric={lyric} currentMusic={currentSong} lyricIndex={lyricIndex} />
             </div>
           </div>
           <div className={styles.controls} disabled={!currentSong.id}>
@@ -199,12 +221,16 @@ const mapState = (state) => ({
   currentIndex: state.music.currentIndex,
   playing: state.music.playing,
   audioEle: state.music.audioEle,
+  lyric: state.music.lyric,
 });
 
 const mapDispatch = (dispatch) => {
   return {
     getTopList: (payload) => {
       dispatch(getTopListRequest(payload));
+    },
+    getLyric: (payload) => {
+      dispatch(getLyricRequest(payload));
     },
     setCurrentIndex: (index) => {
       dispatch(setCurrentIndex(index));

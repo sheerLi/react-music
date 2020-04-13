@@ -2,7 +2,30 @@ import React, { Component } from "react";
 import styles from "./style.less";
 
 class Lyric extends Component {
-  state = {};
+  constructor(props) {
+    super(props);
+    this.musicLyricRef = React.createRef();
+    this.state = {
+      top: 0,
+    };
+  }
+
+  componentDidMount() {
+    this.calcTop();
+  }
+
+  // 计算歌词居中的 top值
+  calcTop = () => {
+    const dom = this.musicLyricRef.current;
+    const { display = "" } = window.getComputedStyle(dom);
+    if (display === "none") {
+      return;
+    }
+    const height = dom.offsetHeight;
+    this.setState({
+      top: Math.floor(height / 34 / 2),
+    });
+  };
 
   renderLyricItems = () => {
     const { currentMusic, lyric, nolyric, lyricIndex } = this.props;
@@ -29,9 +52,20 @@ class Lyric extends Component {
   };
 
   render() {
+    const { lyricIndex } = this.props;
+    const { top } = this.state;
     return (
-      <div ref="musicLyric" className={styles.musicLyric}>
-        <div className={styles.musicLyricItems}>{this.renderLyricItems()}</div>
+      <div ref={this.musicLyricRef} className={styles.musicLyric}>
+        <div
+          className={styles.musicLyricItems}
+          style={{
+            transform: `translate3d(0, ${
+              -34 * (lyricIndex - top)
+            }px, 0)`,
+          }}
+        >
+          {this.renderLyricItems()}
+        </div>
       </div>
     );
   }

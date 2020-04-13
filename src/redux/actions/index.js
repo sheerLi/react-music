@@ -4,10 +4,13 @@ import {
   FETCH_FAILED,
   GET_TOP_LIST_REQUEST,
   GET_TOP_LIST_SUCCESS,
+  GET_LYRIC_REQUEST,
+  GET_LYRIC_SUCCESS,
   SET_PLAYING_LIST,
   SET_CURRENT_INDEX,
   SET_AUDIO_ELEMENT,
   SET_PLAYING,
+  SET_LYRIC,
 } from '@/constants/actionTypes';
 
 export const fetchRequest = function() {
@@ -36,6 +39,20 @@ export function getTopListSuccess(list) {
   };
 }
 
+export function getLyricRequest(payload) {
+  return {
+    type: GET_LYRIC_REQUEST,
+    payload,
+  };
+}
+
+export function getLyricSuccess(lyric) {
+  return {
+    type: GET_LYRIC_SUCCESS,
+    payload: lyric
+  };
+}
+
 export function setPlayingList(list) {
   return {
     type: SET_PLAYING_LIST,
@@ -61,5 +78,12 @@ export function setAudioElement(ele) {
   return {
     type: SET_AUDIO_ELEMENT,
     payload: ele
+  }
+}
+
+export function setLyric(lyric) {
+  return {
+    type: SET_LYRIC,
+    payload: lyric,
   }
 }

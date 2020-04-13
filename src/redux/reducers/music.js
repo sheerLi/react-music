@@ -1,10 +1,11 @@
-import { SET_PLAYING_LIST, SET_CURRENT_INDEX, SET_AUDIO_ELEMENT, SET_PLAYING } from "@/constants/actionTypes";
+import { SET_PLAYING_LIST, SET_CURRENT_INDEX, SET_AUDIO_ELEMENT, SET_PLAYING, SET_LYRIC } from "@/constants/actionTypes";
 
 const initMusicState = {
   audioEle: null, // 播放器元素
   playList: [], // 播放列表
   currentIndex: -1, // 当前播放歌曲索引
-  playing: false // 播放状态
+  playing: false, // 播放状态
+  lyric: [], // 当前歌词
 };
 
 export function musicReducer(state = initMusicState, action) {
@@ -28,6 +29,11 @@ export function musicReducer(state = initMusicState, action) {
       return {
         ...state,
         playing: action.payload,
+      }
+    case SET_LYRIC:
+      return {
+        ...state,
+        lyric: action.payload,
       }
     default:
       return state;
