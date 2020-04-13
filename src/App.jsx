@@ -9,7 +9,7 @@ import { Provider } from "react-redux";
 
 import { store } from "@/store";
 import { AppContainer } from "@/containers";
-import { Playing } from "@/routes";
+import { Playing, Home } from "@/routes";
 
 const App = () => (
   <Provider store={store}>
@@ -20,6 +20,7 @@ const App = () => (
             <Redirect to="/playing" />
           </Route>
           <Route path="/playing" component={Playing} />
+          <Route path="/home" component={Home} />
         </Switch>
       </Router>
     </AppContainer>
