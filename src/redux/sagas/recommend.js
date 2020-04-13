@@ -16,10 +16,8 @@ function* fetchTopListWorker(payload) {
 
 function* fetchLyric(payload) {
   try {
-    yield put(fetchRequest())
     const res = yield call(getLyric, payload);
     yield put(setLyric(res));
-    yield put(fetchSuccess())
   } catch (error) {
     yield put(fetchFailed())
   }

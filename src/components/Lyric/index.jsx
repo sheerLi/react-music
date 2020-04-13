@@ -28,27 +28,24 @@ class Lyric extends Component {
   };
 
   renderLyricItems = () => {
-    const { currentMusic, lyric, nolyric, lyricIndex } = this.props;
+    const { currentMusic, lyric, lyricIndex } = this.props;
     if (!currentMusic || !currentMusic.id) {
       return <p>还没有播放音乐哦！</p>;
     }
 
-    if (nolyric) {
+    if (!Array.isArray(lyric) || lyric.length === 0) {
       return <p>暂无歌词！</p>;
     }
 
-    if (Array.isArray(lyric) && lyric.length > 0) {
-      return lyric.map((item, index) => (
-        <p
-          className={lyricIndex === index ? styles.active : null}
-          key={item.time}
-        >
-          {item.text}
-        </p>
-      ));
-    }
+    return lyric.map((item, index) => (
+      <p
+        className={lyricIndex === index ? styles.active : null}
+        key={item.time}
+      >
+        {item.text}
+      </p>
+    ));
 
-    return <p>歌词加载失败！</p>;
   };
 
   render() {
