@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import { Layout, Menu, Icon } from "antd";
-import pathToRegexp from 'path-to-regexp';
+import {pathToRegexp} from 'path-to-regexp';
 
 import { Link } from "react-router-dom";
 import { urlToList } from '@/utils/util';
