@@ -5,7 +5,7 @@ import {
   GET_CAT_LIST_SUCCESS,
   GET_RECOMMEND_PLAYLIST_REQUEST,
   GET_RECOMMEND_PLAYLIST_SUCCESS,
-} from "@/constants/actionTypes";
+} from '@/constants/actionTypes';
 
 const initRecommendState = {
   topList: [],
@@ -22,7 +22,7 @@ export function recommendReducer(state = initRecommendState, action) {
     case GET_CAT_LIST_SUCCESS:
       return {
         ...state,
-        catList: [...state.catList, ...action.payload]
+        catList: [...state.catList, ...action.payload],
       };
     case GET_TOP_LIST_REQUEST:
       return {

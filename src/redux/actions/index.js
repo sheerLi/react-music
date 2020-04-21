@@ -15,7 +15,7 @@ import {
   SET_AUDIO_ELEMENT,
   SET_PLAYING,
   SET_LYRIC,
-} from "@/constants/actionTypes";
+} from '@/constants/actionTypes';
 
 export const fetchRequest = function () {
   return { type: FETCH_REQUEST };
@@ -30,29 +30,29 @@ export const fetchFailed = function () {
 };
 
 export function getCatListRequest() {
-  return { 
-    type: GET_CAT_LIST_REQUEST, 
+  return {
+    type: GET_CAT_LIST_REQUEST,
   };
 }
 
 export function getCatListSuccess(list) {
-  return { 
-    type: GET_CAT_LIST_SUCCESS, 
-    payload: list
+  return {
+    type: GET_CAT_LIST_SUCCESS,
+    payload: list,
   };
 }
 
 export function getRecommendPlaylistRequest(payload) {
-  return { 
-    type: GET_RECOMMEND_PLAYLIST_REQUEST, 
-    payload 
+  return {
+    type: GET_RECOMMEND_PLAYLIST_REQUEST,
+    payload,
   };
 }
 
 export function getRecommendPlaylistSuccess(list) {
-  return { 
-    type: GET_RECOMMEND_PLAYLIST_SUCCESS, 
-    payload: list
+  return {
+    type: GET_RECOMMEND_PLAYLIST_SUCCESS,
+    payload: list,
   };
 }
 

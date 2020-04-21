@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Tag } from 'antd';
+// import { Tag } from 'antd';
 import { connect } from 'react-redux';
 
 import { getRecommendPlaylistRequest, getCatListRequest } from '@/redux/actions';

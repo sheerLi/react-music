@@ -1,10 +1,10 @@
-import { fork, all } from "redux-saga/effects";
+import { fork, all } from 'redux-saga/effects';
 import {
   watchGetTopList,
   watchGetLyric,
   watchGetRecommendPlaylist,
   watchCatList,
-} from "./recommend";
+} from './recommend';
 
 export default function* rootSaga() {
   yield all([

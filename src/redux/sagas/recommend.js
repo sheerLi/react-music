@@ -1,25 +1,14 @@
-import { call, put, take, fork } from "redux-saga/effects";
-import {
-  getTopList,
-  getLyric,
-  getRecommendPlaylist,
-  getCatList
-} from "@/services/recommend";
-import {
-  fetchRequest,
-  fetchSuccess,
-  fetchFailed,
-  setPlayingList,
-  setLyric,
-} from "@/redux/actions";
+import { call, put, take, fork } from 'redux-saga/effects';
+import { getTopList, getLyric, getRecommendPlaylist, getCatList } from '@/services/recommend';
+import { fetchRequest, fetchSuccess, fetchFailed, setPlayingList, setLyric } from '@/redux/actions';
 import {
   GET_TOP_LIST_REQUEST,
   GET_LYRIC_REQUEST,
   GET_CAT_LIST_REQUEST,
-  GET_CAT_LIST_SUCCESS,
+  // GET_CAT_LIST_SUCCESS,
   GET_RECOMMEND_PLAYLIST_REQUEST,
-  GET_RECOMMEND_PLAYLIST_SUCCESS,
-} from "@/constants/actionTypes";
+  // GET_RECOMMEND_PLAYLIST_SUCCESS,
+} from '@/constants/actionTypes';
 
 function* fetchTopListWorker(payload) {
   try {
@@ -49,10 +38,10 @@ function* fetchLyric(payload) {
 function* fetchCatListWorker() {
   try {
     const res = yield call(getCatList);
-    console.log(res)
+    console.log(res);
     // yield put(setLyric(res));
   } catch (error) {
-    console.log(error)
+    console.log(error);
     yield put(fetchFailed());
   }
 }
