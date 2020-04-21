@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import classnames from "classnames";
-import styles from "./style.less";
+import React, { Component } from 'react';
+import classnames from 'classnames';
+import styles from './style.less';
 
 class Progress extends Component {
   constructor(props) {
@@ -37,27 +37,27 @@ class Progress extends Component {
   }
 
   bindEvents = () => {
-    this.slider.current.addEventListener("mousedown", this.mouseDown);
-    document.addEventListener("mousemove", this.mouseMove);
-    document.addEventListener("mouseup", this.mouseUp);
+    this.slider.current.addEventListener('mousedown', this.mouseDown);
+    document.addEventListener('mousemove', this.mouseMove);
+    document.addEventListener('mouseup', this.mouseUp);
   };
 
   removeEvents = () => {
-    this.slider.current.removeEventListener("mousedown", this.mouseDown);
-    document.removeEventListener("mousemove", this.mouseMove);
-    document.removeEventListener("mouseup", this.mouseUp);
+    this.slider.current.removeEventListener('mousedown', this.mouseDown);
+    document.removeEventListener('mousemove', this.mouseMove);
+    document.removeEventListener('mouseup', this.mouseUp);
   };
 
   // 点击事件
-  handleProgressClick = e => {
-    let rect = this.playerProgress.current.getBoundingClientRect()
+  handleProgressClick = (e) => {
+    let rect = this.playerProgress.current.getBoundingClientRect();
     let offsetWidth = Math.min(
       this.playerProgress.current.clientWidth,
       Math.max(0, e.clientX - rect.left)
-    )
-    this.moveSlider(offsetWidth)
-    this.commitPercent()
-  }
+    );
+    this.moveSlider(offsetWidth);
+    this.commitPercent();
+  };
 
   mouseDown = (e) => {
     this.setState({
@@ -103,23 +103,20 @@ class Progress extends Component {
   commitPercent = () => {
     const { onChange } = this.props;
     const playerProgressWidth = this.playerProgress.current.clientWidth;
-    const percent =
-      this.innerProgress.current.clientWidth / playerProgressWidth;
+    const percent = this.innerProgress.current.clientWidth / playerProgressWidth;
     onChange(percent);
   };
 
   render() {
     return (
-      <div className={styles.playerProgress} ref={this.playerProgress} onClick={this.handleProgressClick}>
-        <div
-          className={styles.playerProgressInner}
-          ref={this.percentProgress}
-        ></div>
+      <div
+        className={styles.playerProgress}
+        ref={this.playerProgress}
+        onClick={this.handleProgressClick}
+      >
+        <div className={styles.playerProgressInner} ref={this.percentProgress}></div>
         <div className={styles.currentLoad} ref={this.innerProgress}>
-          <i
-            className={classnames(styles.iconBtn, styles.iconDot)}
-            ref={this.slider}
-          ></i>
+          <i className={classnames(styles.iconBtn, styles.iconDot)} ref={this.slider}></i>
         </div>
       </div>
     );

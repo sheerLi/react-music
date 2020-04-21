@@ -1,11 +1,11 @@
-import React from "react";
-import { HashRouter as Router, Switch, Route } from "react-router-dom";
-import { Provider } from "react-redux";
+import React from 'react';
+import { HashRouter as Router, Switch, Route } from 'react-router-dom';
+import { Provider } from 'react-redux';
 
-import { store } from "@/store";
-import { AppContainer } from "@/containers";
-import BasicLayout from "@/layouts/BasicLayout";
-import Playing from "@/routes/playing";
+import { store } from '@/store';
+import { AppContainer } from '@/containers';
+import BasicLayout from '@/layouts/BasicLayout';
+import Playing from '@/routes/playing';
 
 const App = () => (
   <Provider store={store}>

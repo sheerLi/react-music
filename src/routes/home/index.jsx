@@ -1,12 +1,8 @@
-import React, { Component } from "react";
-import { Layout, Menu, Carousel } from "antd";
-import {
-  UserOutlined,
-  VideoCameraOutlined,
-  UploadOutlined,
-} from "@ant-design/icons";
+import React, { Component } from 'react';
+import { Layout, Menu, Carousel } from 'antd';
+import { UserOutlined, VideoCameraOutlined, UploadOutlined } from '@ant-design/icons';
 
-import styles from "./style.less";
+import styles from './style.less';
 
 const { Sider, Content } = Layout;
 
@@ -23,10 +19,10 @@ class Home extends Component {
 
   render() {
     return (
-      <Layout style={{ height: "100vh" }}>
+      <Layout style={{ height: '100vh' }}>
         <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
           <div className="logo" />
-          <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>
+          <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
             <Menu.Item key="1">
               <UserOutlined />
               <span>nav 1</span>

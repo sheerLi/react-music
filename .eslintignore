@@ -1,0 +1,9 @@
+# 忽略eslint校验
+
+/config
+/scripts
+/public
+/.commitlintrc.js
+/.postcssrc.js
+/.prettierrc.js
+/jest.config.js

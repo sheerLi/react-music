@@ -1,25 +1,13 @@
-import React from "react";
-import { connect } from "react-redux";
-import classnames from "classnames";
+import React from 'react';
+import { connect } from 'react-redux';
+import classnames from 'classnames';
 
-import {
-  Loading,
-  Button,
-  AlbumInfo,
-  MusicList,
-  Lyric,
-  Progress,
-} from "@/components";
-import {
-  getTopListRequest,
-  getLyricRequest,
-  setCurrentIndex,
-  setPlaying,
-} from "@/redux/actions";
-import { silencePromise, format } from "@/utils/util.js";
-import styles from "./style.less";
+import { Loading, Button, AlbumInfo, MusicList, Lyric, Progress } from '@/components';
+import { getTopListRequest, getLyricRequest, setCurrentIndex, setPlaying } from '@/redux/actions';
+import { silencePromise, format } from '@/utils/util.js';
+import styles from './style.less';
 
-const Buttons = [{ key: "playing", text: "正在播放", path: "/playing" }];
+const Buttons = [{ key: 'playing', text: '正在播放', path: '/playing' }];
 
 class Playing extends React.Component {
   constructor(props) {
@@ -77,7 +65,7 @@ class Playing extends React.Component {
     } else {
       index = currentIndex + 1;
     }
-    this.watchCurrentMusicChange(index)
+    this.watchCurrentMusicChange(index);
   };
 
   prev = () => {
@@ -92,11 +80,10 @@ class Playing extends React.Component {
   };
 
   // 修改音乐进度
-  handleProgressChange = percent => {
+  handleProgressChange = (percent) => {
     const { currentIndex, playList } = this.props;
     if (playList[currentIndex]) {
-      this.audioRef.current.currentTime =
-        playList[currentIndex].duration * percent;
+      this.audioRef.current.currentTime = playList[currentIndex].duration * percent;
     }
   };
 
@@ -107,35 +94,35 @@ class Playing extends React.Component {
     const currentTime = this.audioRef.current.currentTime;
     this.changeLyricIndex(currentTime);
     this.setState({
-      percent: currentTime && duration ? currentTime / duration : 0
-    })   
-  }
+      percent: currentTime && duration ? currentTime / duration : 0,
+    });
+  };
 
   changeLyricIndex = (currentTime) => {
     const { lyric } = this.props;
-    if(!Array.isArray(lyric)) {
+    if (!Array.isArray(lyric)) {
       return;
     }
     lyric.forEach((item, i) => {
-      if(currentTime > item.time) {
+      if (currentTime > item.time) {
         this.setState({
           lyricIndex: i,
-        })
+        });
       }
-    })
-  }
+    });
+  };
 
   // 监听歌曲变化
-  watchCurrentMusicChange = index => {
+  watchCurrentMusicChange = (index) => {
     const { setCurrentIndex, playList, getLyric } = this.props;
     this.setState({
-      lyricIndex: 0
-    })
+      lyricIndex: 0,
+    });
     setCurrentIndex(index);
     this.audioRef.current.src = playList[index].url;
     silencePromise(this.audioRef.current.play());
     getLyric({ id: playList[index].id });
-  }
+  };
 
   render() {
     const { percent, lyricIndex } = this.state;
@@ -149,11 +136,7 @@ class Playing extends React.Component {
             <div className={styles.left}>
               <div className={styles.btnGroup}>
                 {Buttons.map((item) => (
-                  <Button
-                    key={item.key}
-                    className={styles.btn}
-                    text={item.text}
-                  />
+                  <Button key={item.key} className={styles.btn} text={item.text} />
                 ))}
               </div>
               <div className={styles.main}>
@@ -172,20 +155,14 @@ class Playing extends React.Component {
             </div>
           </div>
           <div className={styles.controls} disabled={!currentSong.id}>
-            <div
-              className={classnames(styles.iconBtn, styles.iconPre)}
-              onClick={this.prev}
-            />
+            <div className={classnames(styles.iconBtn, styles.iconPre)} onClick={this.prev} />
             <div
               className={classnames(styles.iconBtn, styles.iconPlay, {
                 [styles.on]: playing,
               })}
               onClick={this.handleTogglePlay}
             />
-            <div
-              className={classnames(styles.iconBtn, styles.iconNext)}
-              onClick={this.next}
-            />
+            <div className={classnames(styles.iconBtn, styles.iconNext)} onClick={this.next} />
             <div className={styles.progressWrap}>
               <div className={styles.musicInfo__name}>{name}</div>
               <div className={styles.musicInfo__time}>{duration && format(duration)}</div>
@@ -199,7 +176,7 @@ class Playing extends React.Component {
           className={styles.playerBg}
           style={{
             backgroundImage: `url(${image}?param=300y300)`,
-            transition: "all 0.8s",
+            transition: 'all 0.8s',
           }}
         ></div>
         <div className={styles.playerMask}></div>

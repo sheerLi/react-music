@@ -1,3 +1,3 @@
 import Axios from './axios';
 
-export { Axios }
+export { Axios };

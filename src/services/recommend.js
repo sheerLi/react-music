@@ -1,7 +1,7 @@
-import { Axios } from "@/helpers";
-import { createTopList } from "@/utils/song";
-import { parseLyric } from "@/utils/util";
-import { TOP_LIST, RECOMMEND_LIST, LYRIC, CAT_LIST } from "@/constants/api";
+import { Axios } from '@/helpers';
+import { createTopList } from '@/utils/song';
+import { parseLyric } from '@/utils/util';
+import { TOP_LIST, RECOMMEND_LIST, LYRIC, CAT_LIST } from '@/constants/api';
 
 export function getCatList() {
   return Axios.get(CAT_LIST);

@@ -5,7 +5,7 @@ import { getMenuData } from './menu';
 
 function getFlatMenuData(menus) {
   let keys = {};
-  menus.forEach(item => {
+  menus.forEach((item) => {
     if (item.children) {
       keys[item.path] = { ...item };
       keys = { ...keys, ...getFlatMenuData(item.children) };
@@ -17,7 +17,7 @@ function getFlatMenuData(menus) {
 }
 
 function findMenuKey(menuData, path) {
-  const menuKey = Object.keys(menuData).find(key => pathToRegexp(path).test(key));
+  const menuKey = Object.keys(menuData).find((key) => pathToRegexp(path).test(key));
   if (menuKey == null) {
     if (path === '/') {
       return null;
@@ -41,10 +41,9 @@ export const getRouterData = () => {
       component: BasicLayout,
     },
     '/music-hall/recommend': {
-      component: Recommend
+      component: Recommend,
     },
-
-  }
+  };
   // Get name from ./menu.js or just set it in the router data.
   const menuData = getFlatMenuData(getMenuData());
 
@@ -52,10 +51,10 @@ export const getRouterData = () => {
   // eg. {name,authority ...routerConfig }
   const routerData = {};
   // The route matches the menu
-  Object.keys(routerConfig).forEach(path => {
+  Object.keys(routerConfig).forEach((path) => {
     // Regular match item name
     // eg.  router /user/:id === /user/chen
-    let menuKey = Object.keys(menuData).find(key => pathToRegexp(path).test(`${key}`));
+    let menuKey = Object.keys(menuData).find((key) => pathToRegexp(path).test(`${key}`));
     const inherited = menuKey == null;
     if (menuKey == null) {
       menuKey = findMenuKey(menuData, path);
@@ -79,4 +78,4 @@ export const getRouterData = () => {
     routerData[path] = router;
   });
   return routerData;
-}
+};

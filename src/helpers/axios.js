@@ -7,7 +7,7 @@ export default class Axios {
 
   static post(url, data, config) {
     return axios.post(url, data, config);
-  } 
+  }
 
   static setBaseURL(url) {
     axios.defaults.baseURL = url;

@@ -1,3 +1,3 @@
 import SiderMenu from './SiderMenu';
 
-export { SiderMenu }
+export { SiderMenu };

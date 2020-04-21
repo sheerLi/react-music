@@ -1,12 +1,12 @@
-import React from "react";
-import { Modal } from "antd";
-import AppService from "@/services/global";
+import React from 'react';
+import { Modal } from 'antd';
+import AppService from '@/services/global';
 
 class AppContainer extends React.Component {
   audioRef = React.createRef();
 
   state = {
-    error: "",
+    error: '',
     isReady: false,
   };
 
@@ -15,15 +15,15 @@ class AppContainer extends React.Component {
   }
 
   initResponseHandle = () => {
-    AppService.addErrorHandle(error => {
+    AppService.addErrorHandle((error) => {
       this.setState({
         error,
-      })
-    })
+      });
+    });
     this.setState({
       isReady: true,
-    })
-  }
+    });
+  };
 
   render() {
     const { error, isReady } = this.state;

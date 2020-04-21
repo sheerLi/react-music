@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import styles from "./style.less";
+import React, { Component } from 'react';
+import styles from './style.less';
 
 class Lyric extends Component {
   constructor(props) {
@@ -17,8 +17,8 @@ class Lyric extends Component {
   // 计算歌词居中的 top值
   calcTop = () => {
     const dom = this.musicLyricRef.current;
-    const { display = "" } = window.getComputedStyle(dom);
-    if (display === "none") {
+    const { display = '' } = window.getComputedStyle(dom);
+    if (display === 'none') {
       return;
     }
     const height = dom.offsetHeight;
@@ -38,14 +38,10 @@ class Lyric extends Component {
     }
 
     return lyric.map((item, index) => (
-      <p
-        className={lyricIndex === index ? styles.active : null}
-        key={item.time}
-      >
+      <p className={lyricIndex === index ? styles.active : null} key={item.time}>
         {item.text}
       </p>
     ));
-
   };
 
   render() {
@@ -56,9 +52,7 @@ class Lyric extends Component {
         <div
           className={styles.musicLyricItems}
           style={{
-            transform: `translate3d(0, ${
-              -34 * (lyricIndex - top)
-            }px, 0)`,
+            transform: `translate3d(0, ${-34 * (lyricIndex - top)}px, 0)`,
           }}
         >
           {this.renderLyricItems()}

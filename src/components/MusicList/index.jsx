@@ -1,8 +1,8 @@
-import React from "react";
-import classnames from "classnames";
+import React from 'react';
+import classnames from 'classnames';
 import { format } from '@/utils/util';
 
-import styles from "./style.less";
+import styles from './style.less';
 
 export default ({ list, onPlay, currentSong, playing }) => (
   <div className={styles.listWrap}>
@@ -13,7 +13,12 @@ export default ({ list, onPlay, currentSong, playing }) => (
     </div>
     <div className={styles.listContent}>
       {list.map((item, index) => (
-        <div className={classnames(styles.listItem, { [styles.on]: item.id === currentSong.id && playing })} key={item.id}>
+        <div
+          className={classnames(styles.listItem, {
+            [styles.on]: item.id === currentSong.id && playing,
+          })}
+          key={item.id}
+        >
           <div className={styles.listItem__num}>{index + 1}</div>
           <div className={styles.listItem__name}>
             {item.name}

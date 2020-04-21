@@ -1,6 +1,6 @@
-import React from "react";
-import defaultCoverPic from "@/assets/player_cover.png";
-import styles from "./style.less";
+import React from 'react';
+import defaultCoverPic from '@/assets/player_cover.png';
+import styles from './style.less';
 
 export default ({ currentMusic }) => (
   <div className={styles.albumWrap}>

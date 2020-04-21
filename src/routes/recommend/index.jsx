@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import { Tag } from "antd";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { Tag } from 'antd';
+import { connect } from 'react-redux';
 
-import { getRecommendPlaylistRequest, getCatListRequest } from "@/redux/actions";
-import styles from "./style.less";
+import { getRecommendPlaylistRequest, getCatListRequest } from '@/redux/actions';
+import styles from './style.less';
 
 class Recommend extends Component {
   constructor(props) {
@@ -19,7 +19,7 @@ class Recommend extends Component {
   fetchCatList = () => {
     const { getCatListRequest } = this.props;
     getCatListRequest();
-  }
+  };
 
   fetchRecommendList = () => {
     const { getRecommendPlaylistRequest } = this.props;
@@ -27,11 +27,7 @@ class Recommend extends Component {
   };
 
   render() {
-    return (
-      <div className={styles.swiper}>
-        
-      </div>
-    );
+    return <div className={styles.swiper}></div>;
   }
 }
 

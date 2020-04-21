@@ -1,3 +1,3 @@
 import AppContainer from './app';
 
-export { AppContainer }
+export { AppContainer };

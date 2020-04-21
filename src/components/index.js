@@ -5,4 +5,4 @@ import MusicList from './MusicList';
 import Lyric from './Lyric';
 import Progress from './Progress';
 
-export { Button, Loading, AlbumInfo, MusicList, Lyric, Progress }
+export { Button, Loading, AlbumInfo, MusicList, Lyric, Progress };

@@ -7,25 +7,25 @@ export function format(value) {
 
 // 补0函数
 export function addZero(s) {
-  return s < 10 ? "0" + s : s;
+  return s < 10 ? '0' + s : s;
 }
 
 // 歌词解析
 export function parseLyric(lrc) {
-  const timeExp = /\[(\d{2,}):(\d{2})\.(\d{2,3})?]/g
-  const lines = lrc.split('\n')
-  const lyric = []
-  lines.forEach(item => {
+  const timeExp = /\[(\d{2,}):(\d{2})\.(\d{2,3})?]/g;
+  const lines = lrc.split('\n');
+  const lyric = [];
+  lines.forEach((item) => {
     const result = timeExp.exec(item);
-    if(!result) {
+    if (!result) {
       return true;
     }
     const text = item.replace(timeExp, '').trim();
-    if(text) {
+    if (text) {
       lyric.push({
         time: (result[1] * 6e4 + result[2] * 1e3 + (result[3] || 0) * 1) / 1e3,
-        text
-      })
+        text,
+      });
     }
   });
   return lyric;
@@ -42,12 +42,12 @@ export function parseLyric(lrc) {
  *         An object that may or may not be `Promise`-like.
  */
 export function isPromise(v) {
-  return v !== undefined && v !== null && typeof v.then === 'function'
+  return v !== undefined && v !== null && typeof v.then === 'function';
 }
 
 export function silencePromise(value) {
   if (isPromise(value)) {
-    value.then(null, () => {})
+    value.then(null, () => {});
   }
 }
 
@@ -70,9 +70,9 @@ function getRenderArr(routes) {
   renderArr.push(routes[0]);
   for (let i = 1; i < routes.length; i += 1) {
     // 去重
-    renderArr = renderArr.filter(item => getRelation(item, routes[i]) !== 1);
+    renderArr = renderArr.filter((item) => getRelation(item, routes[i]) !== 1);
     // 是否包含
-    const isAdd = renderArr.every(item => getRelation(item, routes[i]) === 3);
+    const isAdd = renderArr.every((item) => getRelation(item, routes[i]) === 3);
     if (isAdd) {
       renderArr.push(routes[i]);
     }
@@ -88,15 +88,15 @@ function getRenderArr(routes) {
  */
 export function getRoutes(path, routerData) {
   let routes = Object.keys(routerData).filter(
-    routePath => routePath.indexOf(path) === 0 && routePath !== path
+    (routePath) => routePath.indexOf(path) === 0 && routePath !== path
   );
   // Replace path to '' eg. path='user' /user/name => name
-  routes = routes.map(item => item.replace(path, ''));
+  routes = routes.map((item) => item.replace(path, ''));
   // Get the route to be rendered to remove the deep rendering
   const renderArr = getRenderArr(routes);
   // Conversion and stitching parameters
-  const renderRoutes = renderArr.map(item => {
-    const exact = !routes.some(route => route !== item && getRelation(route, item) === 1);
+  const renderRoutes = renderArr.map((item) => {
+    const exact = !routes.some((route) => route !== item && getRelation(route, item) === 1);
     return {
       exact,
       ...routerData[`${path}${item}`],
@@ -115,9 +115,8 @@ export function isUrl(path) {
 
 // /userinfo/2144/id => ['/userinfo','/useinfo/2144,'/userindo/2144/id']
 export function urlToList(url) {
-  const urllist = url.split('/').filter(i => i);
+  const urllist = url.split('/').filter((i) => i);
   return urllist.map((urlItem, index) => {
     return `/${urllist.slice(0, index + 1).join('/')}`;
   });
 }
-
