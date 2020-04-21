@@ -1,17 +1,15 @@
 import React from "react";
-
+import { Modal } from "antd";
 import AppService from "@/services/global";
 
 class AppContainer extends React.Component {
+  audioRef = React.createRef();
 
-  constructor(props) {
-    super(props);
-    this.audioRef = React.createRef();
-    this.state = {
-      error: ""
-    };
-  }
-  
+  state = {
+    error: "",
+    isReady: false,
+  };
+
   componentDidMount() {
     this.initResponseHandle();
   }
@@ -19,16 +17,21 @@ class AppContainer extends React.Component {
   initResponseHandle = () => {
     AppService.addErrorHandle(error => {
       this.setState({
-        error
-      });
-    });
-  };
+        error,
+      })
+    })
+    this.setState({
+      isReady: true,
+    })
+  }
 
   render() {
+    const { error, isReady } = this.state;
     const { children } = this.props;
     return (
       <>
-        {children}
+        {isReady && children}
+        {error && Modal.confirm(error)}
       </>
     );
   }

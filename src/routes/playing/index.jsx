@@ -12,12 +12,12 @@ import {
 } from "@/components";
 import {
   getTopListRequest,
+  getLyricRequest,
   setCurrentIndex,
   setPlaying,
 } from "@/redux/actions";
 import { silencePromise, format } from "@/utils/util.js";
 import styles from "./style.less";
-import { getLyricRequest } from "../../redux/actions";
 
 const Buttons = [{ key: "playing", text: "正在播放", path: "/playing" }];
 

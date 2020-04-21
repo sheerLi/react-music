@@ -1,40 +1,46 @@
 /* eslint prefer-promise-reject-errors: 0 */ // --> OFF
 
-import { Axios } from '@/helpers';
+import { Axios } from "@/helpers";
 
 export default class AppService {
-  static addErrorHandle = errorHandle => {
+  static addErrorHandle = (errorHandle) => {
     if (!AppService.hasDefaultHandle) {
       AppService.addDefaultResponseInterceptor();
       AppService.hasDefaultHandle = true;
     }
 
-    Axios.addResponseInterceptor(undefined, data => {
+    Axios.addResponseInterceptor(undefined, (data) => {
       if (!data.ignoreError) {
-        errorHandle(data.msg);
+        errorHandle(data);
       }
-      return Promise.reject(data.msg);
-    });
 
+      return Promise.reject(data);
+    });
   };
 
   static addDefaultResponseInterceptor = () => {
     Axios.addResponseInterceptor(
-      response => {
-        if (response.status === 200) {
+      (response) => {
+        if (response.data.code === 200) {
           return response.data;
         }
 
-        const msg = response.data.msg || '未知错误';
+        let msg = response.data.msg || "未知错误";
+
+        // if (Error[response.data.code]) {
+        //   msg = Error[response.data.code];
+        // }
 
         return Promise.reject({
-          ignoreError: response.config.headers['x-ignore-default-error-handle'],
+          ...response.data,
+          ignoreError: response.config.headers["x-ignore-default-error-handle"],
           msg,
         });
       },
-      error => {
+      (error) => {
         const msg =
-          (error.response && error.response.data && error.response.data.msg) || '未知错误';
+          (error.response && error.response.data && error.response.data.msg) ||
+          "未知错误";
 
         return Promise.reject({
           ignoreError: false,
@@ -43,6 +49,4 @@ export default class AppService {
       }
     );
   };
-
-  static hasDefaultHandle = false;
 }

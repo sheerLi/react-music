@@ -2,6 +2,10 @@ import {
   FETCH_REQUEST,
   FETCH_SUCCESS,
   FETCH_FAILED,
+  GET_CAT_LIST_REQUEST,
+  GET_CAT_LIST_SUCCESS,
+  GET_RECOMMEND_PLAYLIST_REQUEST,
+  GET_RECOMMEND_PLAYLIST_SUCCESS,
   GET_TOP_LIST_REQUEST,
   GET_TOP_LIST_SUCCESS,
   GET_LYRIC_REQUEST,
@@ -11,19 +15,46 @@ import {
   SET_AUDIO_ELEMENT,
   SET_PLAYING,
   SET_LYRIC,
-} from '@/constants/actionTypes';
+} from "@/constants/actionTypes";
 
-export const fetchRequest = function() {
+export const fetchRequest = function () {
   return { type: FETCH_REQUEST };
 };
 
-export const fetchSuccess = function() {
+export const fetchSuccess = function () {
   return { type: FETCH_SUCCESS };
 };
 
-export const fetchFailed = function() {
+export const fetchFailed = function () {
   return { type: FETCH_FAILED };
 };
+
+export function getCatListRequest() {
+  return { 
+    type: GET_CAT_LIST_REQUEST, 
+  };
+}
+
+export function getCatListSuccess(list) {
+  return { 
+    type: GET_CAT_LIST_SUCCESS, 
+    payload: list
+  };
+}
+
+export function getRecommendPlaylistRequest(payload) {
+  return { 
+    type: GET_RECOMMEND_PLAYLIST_REQUEST, 
+    payload 
+  };
+}
+
+export function getRecommendPlaylistSuccess(list) {
+  return { 
+    type: GET_RECOMMEND_PLAYLIST_SUCCESS, 
+    payload: list
+  };
+}
 
 export function getTopListRequest(payload) {
   return {
@@ -35,7 +66,7 @@ export function getTopListRequest(payload) {
 export function getTopListSuccess(list) {
   return {
     type: GET_TOP_LIST_SUCCESS,
-    payload: list
+    payload: list,
   };
 }
 
@@ -49,41 +80,41 @@ export function getLyricRequest(payload) {
 export function getLyricSuccess(lyric) {
   return {
     type: GET_LYRIC_SUCCESS,
-    payload: lyric
+    payload: lyric,
   };
 }
 
 export function setPlayingList(list) {
   return {
     type: SET_PLAYING_LIST,
-    payload: list
-  }
+    payload: list,
+  };
 }
 
 export function setCurrentIndex(index) {
   return {
     type: SET_CURRENT_INDEX,
     payload: index,
-  }
+  };
 }
 
 export function setPlaying(playing) {
   return {
     type: SET_PLAYING,
     payload: playing,
-  }
+  };
 }
 
 export function setAudioElement(ele) {
   return {
     type: SET_AUDIO_ELEMENT,
-    payload: ele
-  }
+    payload: ele,
+  };
 }
 
 export function setLyric(lyric) {
   return {
     type: SET_LYRIC,
     payload: lyric,
-  }
+  };
 }

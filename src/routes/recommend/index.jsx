@@ -1,5 +1,8 @@
 import React, { Component } from "react";
-import { Carousel } from "antd";
+import { Tag } from "antd";
+import { connect } from "react-redux";
+
+import { getRecommendPlaylistRequest, getCatListRequest } from "@/redux/actions";
 import styles from "./style.less";
 
 class Recommend extends Component {
@@ -7,23 +10,40 @@ class Recommend extends Component {
     super(props);
     this.state = {};
   }
+
+  componentDidMount() {
+    this.fetchCatList();
+    // this.fetchRecommendList();
+  }
+
+  fetchCatList = () => {
+    const { getCatListRequest } = this.props;
+    getCatListRequest();
+  }
+
+  fetchRecommendList = () => {
+    const { getRecommendPlaylistRequest } = this.props;
+    getRecommendPlaylistRequest();
+  };
+
   render() {
     return (
       <div className={styles.swiper}>
-        <Carousel>
-          <div>
-            <h3>2</h3>
-          </div>
-          <div>
-            <h3>3</h3>
-          </div>
-          <div>
-            <h3>4</h3>
-          </div>
-        </Carousel>
+        
       </div>
     );
   }
 }
 
-export default Recommend;
+const mapDispatch = (dispatch) => {
+  return {
+    getCatListRequest: () => {
+      dispatch(getCatListRequest());
+    },
+    getRecommendPlaylistRequest: (payload) => {
+      dispatch(getRecommendPlaylistRequest(payload));
+    },
+  };
+};
+
+export default connect(null, mapDispatch)(Recommend);
