@@ -4,7 +4,9 @@ import { parseLyric } from '@/utils/util';
 import { TOP_LIST, RECOMMEND_LIST, LYRIC, CAT_LIST } from '@/constants/api';
 
 export function getCatList() {
-  return Axios.get(CAT_LIST);
+  return Axios.get(CAT_LIST).then((res) => {
+    return res.sub.filter((item) => item.hot);
+  });
 }
 
 export function getTopList(payload) {
@@ -22,8 +24,8 @@ export async function getLyric(payload) {
   });
 }
 
-export function getRecommendPlaylist() {
-  return Axios.get(RECOMMEND_LIST);
+export function getRecommendPlaylist(payload) {
+  return Axios.get(RECOMMEND_LIST, payload);
 }
 
 const _formatTopList = (list) => {

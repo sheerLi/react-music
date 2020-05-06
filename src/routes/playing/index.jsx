@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
+import { message } from 'antd';
 
 import { Loading, Button, AlbumInfo, MusicList, Lyric, Progress } from '@/components';
 import { getTopListRequest, getLyricRequest, setCurrentIndex, setPlaying } from '@/redux/actions';
@@ -28,6 +29,7 @@ class Playing extends React.Component {
   };
 
   handleAudioError = () => {
+    message.error('当前歌曲无法播放，直接播放下一首');
     this.next();
   };
 

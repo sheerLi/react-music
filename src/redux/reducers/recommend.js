@@ -9,7 +9,12 @@ import {
 
 const initRecommendState = {
   topList: [],
-  recommendPlaylist: [],
+  hotTags: [],
+  recommendPlaylist: {
+    playlists: [],
+    more: false,
+    total: 0,
+  },
   catList: [],
 };
 
@@ -22,7 +27,7 @@ export function recommendReducer(state = initRecommendState, action) {
     case GET_CAT_LIST_SUCCESS:
       return {
         ...state,
-        catList: [...state.catList, ...action.payload],
+        hotTags: [...state.hotTags, ...action.payload],
       };
     case GET_TOP_LIST_REQUEST:
       return {
@@ -40,7 +45,10 @@ export function recommendReducer(state = initRecommendState, action) {
     case GET_RECOMMEND_PLAYLIST_SUCCESS:
       return {
         ...state,
-        recommendPlaylist: [...state.recommendPlaylist, ...action.payload],
+        recommendPlaylist: {
+          ...state.recommendPlaylist,
+          ...action.payload,
+        },
       };
     default:
       return state;
