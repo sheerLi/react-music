@@ -1,4 +1,4 @@
-const env = '//47.106.228.198:3000';
+const env = 'http://47.106.228.198:3000';
 
 const TOP_LIST = `${env}/top/list`; // 获取排行榜歌单
 const RECOMMEND_LIST = `${env}/top/playlist/highquality`; // 获取精品歌单
